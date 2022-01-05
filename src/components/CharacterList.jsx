@@ -22,6 +22,7 @@ const CharacterList = () => {
       const result = response.data.results;
       setCharacters(result);
       setLoading(false);
+      console.log(result);
       setError(false);
     } catch (error) {
       setLoading(false);
