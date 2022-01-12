@@ -6,21 +6,14 @@ import "../assets/styles/components/Character.scss";
 import { ReactComponent as SVGStar } from "../assets/static/icons/star.svg";
 import CharacterDetail from "./CharacterDetail.jsx";
 import Modal from "./Modal.jsx";
+import useModal from "../custom-hooks/useModal";
 
 const Character = (props) => {
-  const [modal, setModal] = useState(false);
   const [favorite, setFavorite] = useState(false);
+  const { modal, handleCloseModal, handleOpenModal } = useModal();
 
   const { data, favoriteCharacters } = props;
   const { id, image, name, status, species, gender } = data;
-
-  const handleCloseModal = () => {
-    setModal(false);
-  };
-
-  const handleOpenModal = () => {
-    setModal(true);
-  };
 
   const handleSetFavorite = () => {
     props.setFavorite({ data });
