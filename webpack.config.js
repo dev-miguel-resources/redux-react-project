@@ -44,7 +44,24 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
   },
-  performance: {},
-  devtool: "",
-  devServer: {},
+  performance: {
+    hints: process.env.NODE_ENV === "production" ? "error" : false,
+    maxEntrypointsSize: 580000,
+    maxAssetSize: 580000,
+  },
+  devtool: "source-map",
+  devServer: {
+    proxy: {
+      "/api": {
+       target: "http://127.0.0.1:8000",
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: {
+          "^/api": "/api",
+        },
+      },
+    },
+    hot: true,
+    static: path.resolve(__dirname, "public"),
+  },
 };
