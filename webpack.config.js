@@ -46,10 +46,13 @@ module.exports = {
   },
   performance: {
     hints: process.env.NODE_ENV === "production" ? "error" : false,
-    maxEntrypointsSize: 580000,
+    maxEntrypointSize: 580000,
     maxAssetSize: 580000,
   },
   devtool: "source-map",
+  /*devServer: {
+    contentBase: path.join(__dirname, "public"),
+  },*/
   devServer: {
     proxy: {
       "/api": {
