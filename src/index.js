@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { compose } from "redux";
+//import { compose } from "redux";
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import reducer from "./reducers";
@@ -14,12 +14,18 @@ const initialState = {
   sectionActive: "Characters",
 };
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const middlewares = [];
+if (process.env.NODE_ENV === "development") {
+  middlewares.push(logger);
+}
 
+//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// store
 const store = createStore(
   reducer,
   initialState,
-  composeEnhancers(applyMiddleware(logger))
+  applyMiddleware(...middlewares)
 );
 
 ReactDOM.render(
